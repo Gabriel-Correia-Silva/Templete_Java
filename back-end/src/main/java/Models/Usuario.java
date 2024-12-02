@@ -74,7 +74,7 @@ public class Usuario implements UserDetails
 
     private Role role;
 
-    public Usuario (String Nome, String Email, String Senha, Role role) {
+    public Usuario(String Nome, String Email, String Senha, Role role) {
         this.Nome = Nome;
         this.Email = Email;
         this.Senha = Senha;
