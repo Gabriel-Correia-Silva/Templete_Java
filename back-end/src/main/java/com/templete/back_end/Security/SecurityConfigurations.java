@@ -32,16 +32,17 @@ public class SecurityConfigurations {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
     SecurityFilter securityFilter = new SecurityFilter(tokenService, authorizationService);
      return httpSecurity
-             .csrf(AbstractHttpConfigurer::disable)
+             .cors(cors -> {})
              .httpBasic(AbstractHttpConfigurer::disable)
-             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+             .csrf(AbstractHttpConfigurer::disable)
+             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class).sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
              .authorizeHttpRequests(authorize -> authorize
-                     .requestMatchers(HttpMethod.POST, "api/login").permitAll()
-                     .requestMatchers(HttpMethod.POST, "api/register").permitAll()
+                     .requestMatchers(HttpMethod.POST, "/api/login").permitAll()
+                     .requestMatchers(HttpMethod.POST, "/api/register").permitAll()
+                     .requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll()
+                     .requestMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll()
                      .anyRequest().authenticated()
-             )
-             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
-             .build();
+             ).build();
     }
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {

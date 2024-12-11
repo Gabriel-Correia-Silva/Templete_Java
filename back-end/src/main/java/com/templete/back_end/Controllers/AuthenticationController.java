@@ -14,9 +14,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api")
 public class AuthenticationController {
 
     @Autowired
@@ -28,8 +30,12 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
-        var useremailsenha = new UsernamePasswordAuthenticationToken(data.email(), data.senha());
-        var auth = this.authenticationManager.authenticate(useremailsenha);
+        //var useremailsenha = new UsernamePasswordAuthenticationToken(data.email(), data.senha());
+        //var auth = this.authenticationManager.authenticate(useremailsenha);
+
+        var auth = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(data.email(), data.senha()));
+
         var token = tokenService.generateToken((Usuario) auth.getPrincipal());
 
         return ResponseEntity.ok(new LoginDTO(token));
@@ -37,7 +43,7 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data){
-        if(this.repository.findByEmail(data.email()) != null) return ResponseEntity.badRequest().build();
+        if(this.repository.findByEmail(data.email()).isPresent()) return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.senha());
         Usuario newUsuario = new Usuario(data.name(), data.email(), encryptedPassword, data.role());

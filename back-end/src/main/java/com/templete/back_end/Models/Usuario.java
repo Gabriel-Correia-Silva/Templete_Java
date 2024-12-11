@@ -1,10 +1,7 @@
 package com.templete.back_end.Models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +11,7 @@ import java.util.List;
 
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity()
@@ -28,55 +26,16 @@ public class Usuario implements UserDetails
     private String Nome;
 
     @Column(unique = true)
-    private String Email;
+    private String email;
 
     private String Senha;
 
-    public long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public String getNome() {
-        return Nome;
-    }
-
-    public void setNome(String nome) {
-        Nome = nome;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
-
-    public String getSenha() {
-        return Senha;
-    }
-
-    public void setSenha(String senha) {
-        Senha = senha;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     private Role role;
 
     public Usuario(String Nome, String Email, String Senha, Role role) {
         this.Nome = Nome;
-        this.Email = Email;
+        this.email = Email;
         this.Senha = Senha;
         this.role = role;
     }
@@ -90,12 +49,12 @@ public class Usuario implements UserDetails
 
     @Override
     public String getPassword() {
-        return "";
+        return this.Senha;
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return this.email;
     }
 
     @Override
