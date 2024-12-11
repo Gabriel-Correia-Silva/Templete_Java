@@ -1,4 +1,4 @@
-package Models;
+package com.templete.back_end.Models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,18 +16,18 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Usuario")
-@Table(name = "Usuario")
+@Entity()
+@Table(name = "usuarios")
 @EqualsAndHashCode(of = "idUsuario")
 public class Usuario implements UserDetails
 {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idUsuario;
 
     private String Nome;
 
+    @Column(unique = true)
     private String Email;
 
     private String Senha;

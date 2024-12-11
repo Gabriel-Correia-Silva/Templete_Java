@@ -1,11 +1,11 @@
-package Controllers;
+package com.templete.back_end.Controllers;
 
-import DTOs.AuthenticationDTO;
-import DTOs.LoginDTO;
-import DTOs.RegisterDTO;
-import Models.Usuario;
-import Repository.UsuarioRepository;
-import Security.TokenService;
+import com.templete.back_end.DTOs.AuthenticationDTO;
+import com.templete.back_end.DTOs.LoginDTO;
+import com.templete.back_end.DTOs.RegisterDTO;
+import com.templete.back_end.Models.Usuario;
+import com.templete.back_end.Repository.UsuarioRepository;
+import com.templete.back_end.Security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

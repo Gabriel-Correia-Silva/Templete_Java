@@ -1,6 +1,6 @@
-package DTOs;
+package com.templete.back_end.DTOs;
 
-import Models.Role;
+import com.templete.back_end.Models.Role;
 
 public record RegisterDTO(String name,String email, String senha, Role role) {
 }
