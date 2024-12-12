@@ -1,10 +1,10 @@
-package Controllers;
+package com.templete.back_end.Controllers;
 
 import java.util.List;
 
-import Exceptions.UsuarioNotFoundException;
-import Models.Usuario;
-import Repository.UsuarioRepository;
+import com.templete.back_end.Exceptions.UsuarioNotFoundException;
+import com.templete.back_end.Models.Usuario;
+import com.templete.back_end.Repository.UsuarioRepository;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 
 @RestController
